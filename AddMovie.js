@@ -27,6 +27,9 @@ const AddMovie = () => {
       axios.post('https://reqres.in/api/users',obj)
         .then((response) => {
            setMovies(prevMovies => [...prevMovies, obj])
+           setEmail('')
+           setFirstname('')
+           setLastname('')
         }, (error) => {
             console.log(error)
         })
@@ -36,11 +39,11 @@ const AddMovie = () => {
 
     return (
       <form onSubmit={updateMovies}>
-          <span>Please Enter the Email Name : <input type="text" placeholder="Enter the Email" value={email} onChange={updateEmail} /></span>
+          <span>Please Enter the Email Name : <input type="text" placeholder="Enter the Email" id="email" value={email} onChange={updateEmail} /></span>
           <br />
-          <span>Please Enter the First Name : <input type="text" placeholder="Enter the Movie Cost" value={firstName} onChange={updateFirstname}/></span>
+          <span>Please Enter the First Name : <input type="text" placeholder="Enter the Movie Cost" id="firstName" value={firstName} onChange={updateFirstname}/></span>
           <br />
-          <span>Please Enter the Last Name : <input type="text" placeholder="Enter the Last Name" value={lastName} onChange={updateLastname}/></span>
+          <span>Please Enter the Last Name : <input type="text" placeholder="Enter the Last Name"  id="lastName" value={lastName} onChange={updateLastname}/></span>
           <button>Submit</button>
 
       </form>
