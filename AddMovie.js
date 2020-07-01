@@ -1,5 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {MovieContext} from './MovieContext'
+import axios from 'axios'
 
 const AddMovie = () => {
     const [email, setEmail] = useState('');
@@ -22,13 +23,20 @@ const AddMovie = () => {
 
     const updateMovies = (e) => {
       e.preventDefault();
-      setMovies(prevMovies => [...prevMovies, {email:email, first_name: firstname, last_name: lastName}])
+      const obj = {email:email, first_name: firstName, last_name: lastName};
+      axios.post('https://reqres.in/api/users',obj)
+        .then((response) => {
+           setMovies(prevMovies => [...prevMovies, obj])
+        }, (error) => {
+            console.log(error)
+        })
+     
     }
 
 
     return (
       <form onSubmit={updateMovies}>
-          <span>Please Enter the movie Name : <input type="text" placeholder="Enter the Email" value={email} onChange={updateEmail} /></span>
+          <span>Please Enter the Email Name : <input type="text" placeholder="Enter the Email" value={email} onChange={updateEmail} /></span>
           <br />
           <span>Please Enter the First Name : <input type="text" placeholder="Enter the Movie Cost" value={firstName} onChange={updateFirstname}/></span>
           <br />
